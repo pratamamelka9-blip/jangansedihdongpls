@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masih Ada Aku 💬</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+
+body{
+    background:linear-gradient(135deg,#1f1c2c,#928dab);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    overflow:hidden;
+}
+
+.chatbox{
+    width:350px;
+    height:500px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    overflow-y:auto;
+    box-shadow:0 0 30px rgba(0,0,0,0.4);
+}
+
+.message{
+    padding:10px 15px;
+    margin:8px 0;
+    border-radius:15px;
+    max-width:75%;
+    animation:fade 0.4s ease;
+}
+
+.left{
+    background:rgba(255,255,255,0.2);
+    align-self:flex-start;
+}
+
+.right{
+    background:#ff4d6d;
+    align-self:flex-end;
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.buttons{
+    margin-top:auto;
+    text-align:center;
+}
+
+button{
+    padding:8px 15px;
+    margin:5px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    background:#ff4d6d;
+    color:white;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="chatbox" id="chat">
+    <div class="message left">Aku capek deh... 😔</div>
+    <div class="message left">Kayaknya susah banget move on...</div>
+
+    <div class="buttons" id="choice1">
+        <button onclick="respon1()">Sabar ya...</button>
+        <button onclick="respon2()">Udah lah lupain aja</button>
+    </div>
+</div>
+
+<script>
+const chat = document.getElementById("chat");
+
+function addMessage(text, side){
+    const msg = document.createElement("div");
+    msg.classList.add("message", side);
+    msg.innerText = text;
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function respon1(){
+    document.getElementById("choice1").remove();
+    addMessage("Sabar ya...", "right");
+
+    setTimeout(()=>{
+        addMessage("Aku cuma takut sendirian 😞", "left");
+    },800);
+
+    setTimeout(()=>{
+        addMessage("Kalau kamu gak sendirian?", "right");
+    },1600);
+
+    setTimeout(()=>{
+        addMessage("Maksudnya? 🤨", "left");
+    },2400);
+
+    setTimeout(()=>{
+        addMessage("Jangan gamon... masih ada aku 😉", "right");
+        ending();
+    },3200);
+}
+
+function respon2(){
+    document.getElementById("choice1").remove();
+    addMessage("Udah lah lupain aja", "right");
+
+    setTimeout(()=>{
+        addMessage("Gak segampang itu 😒", "left");
+    },1000);
+
+    setTimeout(()=>{
+        addMessage("Yaudah... tapi kalau butuh orang baru...", "right");
+    },2000);
+
+    setTimeout(()=>{
+        addMessage("Aku di sini 😌", "right");
+        ending();
+    },3000);
+}
+
+function ending(){
+    setTimeout(()=>{
+        const btn = document.createElement("button");
+        btn.innerText = "Peluk Virtual 🤍";
+        btn.onclick = ()=>{
+            addMessage("🤍🤍🤍", "left");
+            loveEffect();
+        };
+        chat.appendChild(btn);
+    },4000);
+}
+
+function loveEffect(){
+    for(let i=0;i<20;i++){
+        const heart = document.createElement("div");
+        heart.innerText="💖";
+        heart.style.position="absolute";
+        heart.style.left=Math.random()*window.innerWidth+"px";
+        heart.style.top=Math.random()*window.innerHeight+"px";
+        heart.style.fontSize="20px";
+        heart.style.animation="fade 2s ease forwards";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),2000);
+    }
+}
+</script>
+
+</body>
+</html>
